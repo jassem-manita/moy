@@ -1,61 +1,87 @@
 var subjectsData = {
-    MP: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique', 'Sti', 'Francais', 'Anglais'],
-    PC: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique', 'Sti', 'Francais', 'Anglais'],
-    PT: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique', 'Sti', 'Francais', 'Anglais']
+    '1': {
+        MP: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique', 'Sti', 'Francais', 'Anglais'],
+        PC: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique', 'Sti', 'Francais', 'Anglais'],
+        PT: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique', 'Sti', 'Francais', 'Anglais']
+    },
+    '2': {
+        MP: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Sti', 'Francais', 'Anglais'],
+        PC: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Sti', 'Francais', 'Anglais'],
+        PT: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Sti', 'Francais', 'Anglais']
+    }
+};
+
+var coefficients = {
+    '1': {
+        MP: [7, 7, 8, 4, 3, 5, 3, 3],
+        PC: [5, 5, 10, 6, 3, 5, 3, 3],
+        PT: [5, 5, 8, 4, 3, 9, 3, 3]
+    },
+    '2': {
+        MP: [7, 7, 10, 4, 6, 3, 3],
+        PC: [5, 5, 11, 6, 6, 3, 3],
+        PT: [5, 5, 10, 4, 10, 3, 3]
+    }
 };
 
 function updateSubjects() {
-    var major = document.getElementById('major').value;
-    var year = document.getElementById('year').value;
-    var subjectsContainer = document.getElementById('subjectsContainer');
-    subjectsContainer.innerHTML = '';
+    var major = $('#major').val();
+    var year = $('#year').val();
+    var subjectsContainer = $('#subjectsContainer');
+    subjectsContainer.html('');
 
-    subjectsData[major].forEach(function (subject, index) {
-        var subjectDiv = document.createElement('div');
-        subjectDiv.innerHTML = `<div class="subject">
-                                    <h3>${subject}</h3>
+    subjectsData[year][major].forEach(function (subject, index) {
+        var subjectDiv = $(`<div class="subject animate__fadeInUp">
+                                <h3>${subject}</h3>
+                                <div class="input-group">
                                     <label for="oral${index}">Orale :</label>
-                                    <input type="number" id="oral${index}_y${year}" name="oral${index}" step="0.25" min="0" max="20" required>
+                                    <input type="number" id="oral${index}_y${year}" name="oral${index}" step="0.25" min="0" max="20" value="0" required>
+                                </div>
+                                <div class="input-group">
                                     <label for="ds${index}">DS :</label>
-                                    <input type="number" id="ds${index}_y${year}" name="ds${index}" step="0.25" min="0" max="20" required>
+                                    <input type="number" id="ds${index}_y${year}" name="ds${index}" step="0.25" min="0" max="20" value="0" required>
+                                </div>
+                                <div class="input-group">
                                     <label for="exam${index}">Exam :</label>
-                                    <input type="number" id="exam${index}_y${year}" name="exam${index}" step="0.25" min="0" max="20" required>
-                                </div>`;
-        subjectsContainer.appendChild(subjectDiv);
+                                    <input type="number" id="exam${index}_y${year}" name="exam${index}" step="0.25" min="0" max="20" value="0" required>
+                                </div>
+                            </div>`);
+        subjectsContainer.append(subjectDiv);
     });
 }
 
 function proceedToStep2() {
-    var step1 = document.getElementById('step1');
-    var step2 = document.getElementById('step2');
-    step1.style.display = 'none';
-    step2.style.display = 'block';
+    var step1 = $('#step1');
+    var step2 = $('#step2');
+    step1.hide();
+    step2.show();
 
     updateSubjects();
 }
 
 function calculateGPA() {
-    var major = document.getElementById('major').value;
-    var year = document.getElementById('year').value;
+    var major = $('#major').val();
+    var year = $('#year').val();
 
-    var subjects = subjectsData[major];
-    var coefficients = [0.2, 0.3, 0.5]; // Coefficients for oral, DS, and Exam respectively
-
+    var subjects = subjectsData[year][major];
+    var currentCoefficients = coefficients[year][major];
+    
     var totalCredits = 0;
     var totalPoints = 0;
 
     subjects.forEach(function (subject, index) {
-        var oral = parseFloat(document.getElementById(`oral${index}_y${year}`).value) || 0;
-        var ds = parseFloat(document.getElementById(`ds${index}_y${year}`).value) || 0;
-        var exam = parseFloat(document.getElementById(`exam${index}_y${year}`).value) || 0;
+        var oral = parseFloat($(`#oral${index}_y${year}`).val()) || 0;
+        var ds = parseFloat($(`#ds${index}_y${year}`).val()) || 0;
+        var exam = parseFloat($(`#exam${index}_y${year}`).val()) || 0;
 
-        totalCredits += 1; // 1 credit per subject
-
-        totalPoints += (oral * coefficients[0] + ds * coefficients[1] + exam * coefficients[2]);
+        var subjectMoy = (oral * 0.2 + ds * 0.3 + exam * 0.5) * currentCoefficients[index];
+        
+        totalCredits += currentCoefficients[index]; // Sum of coefficients
+        totalPoints += subjectMoy;
     });
 
     var semesterGPA = totalPoints / totalCredits;
 
-    var resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `<p>Moyenne de Semestre pour la filière ${major} en année ${year} : ${semesterGPA.toFixed(2)}</p>`;
+    var resultDiv = $('#result');
+    resultDiv.html(`<p>Moyenne de Semestre pour la filière ${major} en année ${year} : ${semesterGPA.toFixed(2)}</p>`);
 }
