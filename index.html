@@ -7,14 +7,12 @@
     <title>Calculateur de Moyenne de Semestre</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 </head>
 
 <body>
-    <div class="container" id="container">
+    <div class="container">
         <h1 class="animate__fadeIn">Calculateur de Moyenne de Semestre</h1>
         <div id="step1" class="step animate__fadeIn">
-            <h2>Étape 1: Choisissez votre filière et année d'étude</h2>
             <form id="step1Form">
                 <div class="input-group">
                     <label for="major">Choisissez votre filière :</label>
@@ -38,7 +36,6 @@
         </div>
 
         <div id="step2" class="step animate__fadeIn" style="display: none;">
-            <h2>Étape 2: Remplissez les notes pour chaque matière</h2>
             <form id="gpaCalculator">
                 <div id="subjectsContainer"></div>
                 <button type="button" onclick="calculateGPA()">Calculer la Moyenne</button>
@@ -46,8 +43,6 @@
         </div>
 
         <div id="result" class="animate__fadeIn"></div>
-
-        <button type="button" onclick="downloadPDF()">Télécharger le rapport en PDF</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
