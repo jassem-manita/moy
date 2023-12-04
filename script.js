@@ -31,8 +31,22 @@ function updateSubjects() {
     subjectsContainer.html('');
 
     subjectsData[year][major].forEach(function (subject, index) {
+        // Define emojis for each subject (customize as needed)
+        var subjectEmojis = {
+            'Algebre': '🧮',
+            'Analyse': '📈',
+            'Physique': '⚙️',
+            'Chimie': '🧪',
+            'Informatique': '💻',
+            'Sti': '🛠️',
+            'Francais': '📝',
+            'Anglais': '🌐'
+        };
+
+        var emoji = subjectEmojis[subject] || '📚'; // Default emoji if not specified
+
         var subjectDiv = $(`<div class="subject animate__fadeInUp">
-                                <h3>${subject}</h3>
+                                <h3>${subject} ${emoji}</h3>
                                 <div class="input-group">
                                     <label for="oral${index}">Orale :</label>
                                     <input type="number" id="oral${index}_y${year}" name="oral${index}" step="0.25" min="0" max="20" value="0" required>
@@ -85,3 +99,5 @@ function calculateGPA() {
     var resultDiv = $('#result');
     resultDiv.html(`<p>Moyenne de Semestre pour la filière ${major} en année ${year} : ${semesterGPA.toFixed(2)}</p>`);
 }
+
+
