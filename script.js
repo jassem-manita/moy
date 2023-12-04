@@ -5,9 +5,9 @@ var subjectsData = {
         PT: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique', 'Sti', 'Francais', 'Anglais']
     },
     '2': {
-        MP: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Sti', 'Francais', 'Anglais'],
-        PC: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Sti', 'Francais', 'Anglais'],
-        PT: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Sti', 'Francais', 'Anglais']
+        MP: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique','Sti', 'Francais', 'Anglais'],
+        PC: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique','Sti', 'Francais', 'Anglais'],
+        PT: ['Algebre', 'Analyse', 'Physique', 'Chimie', 'Informatique','Sti', 'Francais', 'Anglais']
     }
 };
 
@@ -18,9 +18,9 @@ var coefficients = {
         PT: [5, 5, 8, 4, 3, 9, 3, 3]
     },
     '2': {
-        MP: [7, 7, 10, 4, 6, 3, 3],
-        PC: [5, 5, 11, 6, 6, 3, 3],
-        PT: [5, 5, 10, 4, 10, 3, 3]
+        MP: [7, 7, 10, 4,3, 6, 3, 3],
+        PC: [5, 5, 11, 6,3, 6, 3, 3],
+        PT: [5, 5, 10, 4,3, 10, 3, 3]
     }
 };
 
