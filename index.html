@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Moyenne de Semestre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculateur de Moyenne de Semestre</h1>
+        <div id="step1" class="step">
+            <h2>Étape 1: Choisissez votre filière et année d'étude</h2>
+            <form id="step1Form">
+                <label for="major">Choisissez votre filière :</label>
+                <select id="major" name="major" required>
+                    <option value="MP">MP</option>
+                    <option value="PC">PC</option>
+                    <option value="PT">PT</option>
+                </select>
+
+                <label for="year">Choisissez votre année d'étude :</label>
+                <select id="year" name="year" required>
+                    <option value="1">Première Année</option>
+                    <option value="2">Deuxième Année</option>
+                </select>
+
+                <button type="button" onclick="proceedToStep2()">Suivant</button>
+            </form>
+        </div>
+
+        <div id="step2" class="step" style="display: none;">
+            <h2>Étape 2: Remplissez les notes pour chaque matière</h2>
+            <form id="gpaCalculator">
+                <div id="subjectsContainer"></div>
+                <button type="button" onclick="calculateGPA()">Calculer la Moyenne</button>
+            </form>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
