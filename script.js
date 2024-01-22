@@ -31,7 +31,7 @@ function updateSubjects() {
     subjectsContainer.html('');
 
     subjectsData[year][major].forEach(function (subject, index) {
-        // Define emojis for each subject (customize as needed)
+        
         var subjectEmojis = {
             'Algebre': '🧮',
             'Analyse': '📈',
@@ -43,7 +43,7 @@ function updateSubjects() {
             'Anglais': '🌐'
         };
 
-        var emoji = subjectEmojis[subject] || '📚'; // Default emoji if not specified
+        var emoji = subjectEmojis[subject] || '📚'; 
 
         var subjectDiv = $(`<div class="subject animate__fadeInUp">
                                 <h3>${subject} ${emoji}</h3>
@@ -90,7 +90,7 @@ function calculateGPA() {
 
         var subjectMoy = (oral * 0.2 + ds * 0.3 + exam * 0.5) * currentCoefficients[index];
         
-        totalCredits += currentCoefficients[index]; // Sum of coefficients
+        totalCredits += currentCoefficients[index]; 
         totalPoints += subjectMoy;
     });
 
